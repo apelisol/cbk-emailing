@@ -20,6 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Email Templates
     Route::resource('email-templates', EmailTemplateController::class);
+    Route::post('/email-templates/preview', [EmailTemplateController::class, 'previewTemplate'])->name('email-templates.preview');
     
     // Email Campaigns
     Route::get('/email-campaigns', [EmailCampaignController::class, 'index'])->name('email-campaigns.index');

@@ -2,10 +2,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmailTemplate;
+use App\Services\TemplateManager;
 use Illuminate\Http\Request;
 
 class EmailTemplateController extends Controller
 {
+    protected $templateManager;
+
+    public function __construct(TemplateManager $templateManager)
+    {
+        $this->templateManager = $templateManager;
+    }
+
     public function index()
     {
         $templates = auth()->user()->emailTemplates()->latest()->paginate(15);
@@ -14,7 +22,35 @@ class EmailTemplateController extends Controller
 
     public function create()
     {
-        return view('email-templates.create');
+        $templates = $this->templateManager->getAvailableTemplates();
+        return view('email-templates.create', compact('templates'));
+    }
+
+    public function previewTemplate(Request $request)
+    {
+        $request->validate([
+            'template' => 'required|string',
+        ]);
+
+        try {
+            $template = $this->templateManager->getAvailableTemplates()
+                ->firstWhere('id', $request->template);
+
+            if (!$template) {
+                return response()->json(['error' => 'Template not found'], 404);
+            }
+
+            // Generate preview with sample data
+            $sampleData = array_fill_keys($template['placeholders'], 'Sample Data');
+            $preview = $this->templateManager->getTemplateContent($request->template, $sampleData);
+
+            return response()->json([
+                'preview' => $preview,
+                'placeholders' => $template['placeholders']
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)
