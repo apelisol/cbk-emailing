@@ -25,31 +25,47 @@
                         {{ __('Campaigns') }}
                     </x-nav-link>
                     <!-- Sent Emails Dropdown -->
-                    <div class="hidden sm:flex sm:items-center sm:ml-6" x-data="{ open: false }">
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
-                                <button @click="open = !open" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    {{ __('Sent Emails') }}
-                                    <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
+                    <div class="hidden sm:flex sm:items-center sm:ml-6" x-data="{ open: false }" @click.away="open = false">
+                        <div class="relative">
+                            <button @click="open = !open" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                {{ __('Sent Emails') }}
+                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
 
-                            <x-slot name="content">
-                                <x-dropdown-link :href="route('sent-emails.index')">
-                                    {{ __('View Sent Emails') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('direct-emails.create')" class="bg-indigo-50 text-indigo-700 hover:bg-indigo-100">
-                                    <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                    </svg>
-                                    {{ __('New Direct Email') }}
-                                </x-dropdown-link>
-                            </x-slot>
-                        </x-dropdown>
+                            <!-- Dropdown panel, show/hide based on dropdown state -->
+                            <div x-show="open" 
+                                 x-transition:enter="transition ease-out duration-100"
+                                 x-transition:enter-start="transform opacity-0 scale-95"
+                                 x-transition:enter-end="transform opacity-100 scale-100"
+                                 x-transition:leave="transition ease-in duration-75"
+                                 x-transition:leave-start="transform opacity-100 scale-100"
+                                 x-transition:leave-end="transform opacity-0 scale-95"
+                                 class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+                                 role="menu" 
+                                 aria-orientation="vertical" 
+                                 aria-labelledby="user-menu-button" 
+                                 tabindex="-1">
+                                <div class="py-1" role="none">
+                                    <a href="{{ route('sent-emails.index') }}" 
+                                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
+                                       role="menuitem" 
+                                       tabindex="-1">
+                                        {{ __('View Sent Emails') }}
+                                    </a>
+                                    <a href="{{ route('direct-emails.create') }}" 
+                                       class="block px-4 py-2 text-sm text-indigo-700 bg-indigo-50 hover:bg-indigo-100" 
+                                       role="menuitem" 
+                                       tabindex="-1">
+                                        <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                        </svg>
+                                        {{ __('New Direct Email') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
