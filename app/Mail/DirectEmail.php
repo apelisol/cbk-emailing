@@ -64,4 +64,15 @@ class DirectEmail extends Mailable
     {
         return [];
     }
+
+
+    // public function build(): Mailable
+    // {
+    //     return $this->view('emails.direct')
+    //         ->with([
+    //             'client' => $this->client,
+    //             'content' => $this->content,
+    //         ])
+    //         ->subject($this->subject);
+    // }
 }

@@ -8,7 +8,9 @@ use App\Mail\DirectEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class DirectEmailController extends Controller
 {
@@ -17,8 +19,16 @@ class DirectEmailController extends Controller
      */
     public function index()
     {
-        $emails = SentEmail::where('type', 'direct')
-            ->where('user_id', auth()->id())
+        // Ensure the type column exists
+        if (!Schema::hasColumn('sent_emails', 'type')) {
+            Schema::table('sent_emails', function (Blueprint $table) {
+                $table->enum('type', ['campaign', 'direct'])->default('campaign')->after('id');
+            });
+        }
+
+        // Use the scopes from the model
+        $emails = SentEmail::direct()
+            ->forCurrentUser()
             ->with('client')
             ->latest()
             ->paginate(15);
