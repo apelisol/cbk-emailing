@@ -3,9 +3,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ClientController extends Controller
 {
+    use AuthorizesRequests;
+    
     public function index()
     {
         $clients = auth()->user()->clients()->latest()->paginate(15);
