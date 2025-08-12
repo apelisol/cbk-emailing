@@ -7,9 +7,29 @@ use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SentEmailController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
+// Show 403 for root URL
 Route::get('/', function () {
-    return view('welcome');
+    abort(403, 'Access Denied');
+})->name('home');
+
+// Special auth routes - these should be shared only with authorized personnel
+Route::get('/secure/login', function () {
+    return view('auth.login');
+})->middleware('guest')->name('login');
+
+Route::get('/secure/register', function () {
+    return view('auth.register');
+})->middleware('guest')->name('register');
+
+// Disable default auth routes
+Route::match(['get', 'post'], '/login', function () {
+    abort(404);
+});
+
+Route::match(['get', 'post'], '/register', function () {
+    abort(404);
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
