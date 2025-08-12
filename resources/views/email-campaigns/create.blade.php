@@ -64,7 +64,7 @@
                                 @error('custom_body')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
-                                <p class="mt-1 text-sm text-gray-500">You can use placeholders: {{name}}, {{email}}, {{phone}}</p>
+                                <p class="mt-1 text-sm text-gray-500">You can use placeholders: @{{name}}, @{{email}}, @{{phone}}</p>
                             </div>
                         </div>
 
