@@ -24,15 +24,33 @@
                     <x-nav-link :href="route('email-campaigns.index')" :active="request()->routeIs('email-campaigns.*')">
                         {{ __('Campaigns') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('sent-emails.index')" :active="request()->routeIs('sent-emails.*')">
-                        {{ __('Sent Emails') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('direct-emails.index')" :active="request()->routeIs('direct-emails.*')" class="bg-indigo-600 text-white hover:bg-indigo-700 hover:text-white">
-                        <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        {{ __('Direct Email') }}
-                    </x-nav-link>
+                    <!-- Sent Emails Dropdown -->
+                    <div class="hidden sm:flex sm:items-center sm:ml-6" x-data="{ open: false }">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button @click="open = !open" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    {{ __('Sent Emails') }}
+                                    <div class="ms-1">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('sent-emails.index')">
+                                    {{ __('View Sent Emails') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link :href="route('direct-emails.create')" class="bg-indigo-50 text-indigo-700 hover:bg-indigo-100">
+                                    <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                    </svg>
+                                    {{ __('New Direct Email') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
                 </div>
             </div>
 
@@ -97,15 +115,20 @@
             <x-responsive-nav-link :href="route('email-campaigns.index')" :active="request()->routeIs('email-campaigns.*')">
                 {{ __('Campaigns') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('sent-emails.index')" :active="request()->routeIs('sent-emails.*')">
-                {{ __('Sent Emails') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('direct-emails.index')" :active="request()->routeIs('direct-emails.*')" class="bg-indigo-600 text-white hover:bg-indigo-700">
-                <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-                {{ __('Direct Email') }}
-            </x-responsive-nav-link>
+            <div class="space-y-1">
+                <div class="px-4 pt-2 pb-1 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    {{ __('Sent Emails') }}
+                </div>
+                <x-responsive-nav-link :href="route('sent-emails.index')" :active="request()->routeIs('sent-emails.*')">
+                    {{ __('View Sent Emails') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('direct-emails.create')" class="bg-indigo-50 text-indigo-700 hover:bg-indigo-100">
+                    <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    {{ __('New Direct Email') }}
+                </x-responsive-nav-link>
+            </div>
         </div>
 
         <!-- Responsive Settings Options -->
