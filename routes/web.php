@@ -9,26 +9,25 @@ use App\Http\Controllers\SentEmailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-// Show 403 for root URL
+// Show default Laravel 403 page for root URL
 Route::get('/', function () {
-    abort(403, 'Access Denied');
+    abort(403);
 })->name('home');
 
-// Special auth routes - these should be shared only with authorized personnel
-Route::get('/secure/login', function () {
-    return view('auth.login');
-})->middleware('guest')->name('login');
-
-Route::get('/secure/register', function () {
-    return view('auth.register');
-})->middleware('guest')->name('register');
-
-// Disable default auth routes
+// Disable all auth routes by default
 Route::match(['get', 'post'], '/login', function () {
     abort(404);
 });
 
 Route::match(['get', 'post'], '/register', function () {
+    abort(404);
+});
+
+Route::match(['get', 'post'], '/secure/login', function () {
+    abort(404);
+});
+
+Route::match(['get', 'post'], '/secure/register', function () {
     abort(404);
 });
 
