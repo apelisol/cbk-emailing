@@ -27,12 +27,20 @@ class SentEmail extends Model
         'sent_at' => 'datetime',
     ];
 
-    // Status constants
+    /**
+     * The possible status values for sent emails.
+     *
+     * @var array
+     */
     const STATUS_PENDING = 'pending';
     const STATUS_SENT = 'sent';
     const STATUS_FAILED = 'failed';
 
-    // Type constants
+    /**
+     * The possible types of sent emails.
+     *
+     * @var array
+     */
     const TYPE_CAMPAIGN = 'campaign';
     const TYPE_DIRECT = 'direct';
 
@@ -83,21 +91,4 @@ class SentEmail extends Model
     {
         return $query->where('user_id', auth()->id());
     }
-
-    /**
-     * The possible status values for sent emails.
-     *
-     * @var array
-     */
-    const STATUS_PENDING = 'pending';
-    const STATUS_SENT = 'sent';
-    const STATUS_FAILED = 'failed';
-
-    /**
-     * The possible types of sent emails.
-     *
-     * @var array
-     */
-    const TYPE_CAMPAIGN = 'campaign';
-    const TYPE_DIRECT = 'direct';
 }
