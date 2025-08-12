@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('sent-emails.index')" :active="request()->routeIs('sent-emails.*')">
                         {{ __('Sent Emails') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('direct-emails.index')" :active="request()->routeIs('direct-emails.*')" class="bg-indigo-50 text-indigo-700">
+                        {{ __('Direct Emails') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -93,6 +96,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('sent-emails.index')" :active="request()->routeIs('sent-emails.*')">
                 {{ __('Sent Emails') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('direct-emails.index')" :active="request()->routeIs('direct-emails.*')" class="bg-indigo-50 text-indigo-700">
+                {{ __('Direct Emails') }}
             </x-responsive-nav-link>
         </div>
 

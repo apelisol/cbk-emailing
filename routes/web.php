@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DirectEmailController;
 use App\Http\Controllers\EmailCampaignController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\ProfileController;
@@ -37,6 +38,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Sent Emails
     Route::get('/sent-emails', [SentEmailController::class, 'index'])->name('sent-emails.index');
     Route::get('/sent-emails/{sentEmail}', [SentEmailController::class, 'show'])->name('sent-emails.show');
+    
+    // Direct Emails
+    Route::resource('direct-emails', DirectEmailController::class)->only([
+        'index', 'create', 'store', 'show'
+    ]);
 });
 
 Route::middleware('auth')->group(function () {

@@ -13,18 +13,36 @@ class SentEmail extends Model
         'recipient_email',
         'recipient_name', 
         'subject',
-        'body',
+        'content',
         'status',
-        'error_message',
+        'error',
         'sent_at',
         'email_job_id',
         'client_id',
         'user_id',
+        'type',
     ];
 
     protected $casts = [
         'sent_at' => 'datetime',
     ];
+
+    /**
+     * The possible status values for sent emails.
+     *
+     * @var array
+     */
+    const STATUS_PENDING = 'pending';
+    const STATUS_SENT = 'sent';
+    const STATUS_FAILED = 'failed';
+
+    /**
+     * The possible types of sent emails.
+     *
+     * @var array
+     */
+    const TYPE_CAMPAIGN = 'campaign';
+    const TYPE_DIRECT = 'direct';
 
     public function user(): BelongsTo
     {
