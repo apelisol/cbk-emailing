@@ -17,6 +17,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Authentication Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is used to protect authentication routes. It should be a long,
+    | random string that is kept secret.
+    |
+    */
+    'auth_key' => env('AUTH_KEY', 'default-secret-key-change-me'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
