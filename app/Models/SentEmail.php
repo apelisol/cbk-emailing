@@ -83,6 +83,8 @@ class SentEmail extends Model
     {
         return $query->where('user_id', auth()->id());
     }
+
+    /**
      * The possible status values for sent emails.
      *
      * @var array
@@ -98,19 +100,4 @@ class SentEmail extends Model
      */
     const TYPE_CAMPAIGN = 'campaign';
     const TYPE_DIRECT = 'direct';
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function client(): BelongsTo
-    {
-        return $this->belongsTo(Client::class);
-    }
-
-    public function emailJob(): BelongsTo
-    {
-        return $this->belongsTo(EmailJob::class);
-    }
 }
