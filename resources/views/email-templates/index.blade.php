@@ -30,7 +30,7 @@
                                             <div class="flex flex-wrap gap-1">
                                                 @foreach($template->placeholders as $placeholder)
                                                     <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
-                                                        {{{{ $placeholder }}}}
+                                                        {{ $placeholder }}
                                                     </span>
                                                 @endforeach
                                             </div>
