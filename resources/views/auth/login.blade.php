@@ -129,8 +129,9 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login', ['auth_key' => request('auth_key')]) }}">
                 @csrf
+                <input type="hidden" name="auth_key" value="{{ request('auth_key') }}">
 
                 <div class="form-group">
                     <label for="email">Email Address</label>

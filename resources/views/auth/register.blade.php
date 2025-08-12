@@ -110,8 +110,9 @@
         </div>
         
         <div class="auth-body">
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register', ['auth_key' => request('auth_key')]) }}">
                 @csrf
+                <input type="hidden" name="auth_key" value="{{ request('auth_key') }}">
 
                 <div class="form-group">
                     <label for="name">Full Name</label>
