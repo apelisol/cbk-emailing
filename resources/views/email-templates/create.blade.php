@@ -28,7 +28,7 @@
                             @error('subject')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
-                            <p class="mt-1 text-sm text-gray-500">You can use placeholders like: {{name}}, {{email}}, {{phone}}</p>
+                            <p class="mt-1 text-sm text-gray-500">You can use placeholders like: @{{name}}, @{{email}}, @{{phone}}</p>
                         </div>
 
                         <div class="mb-6">
@@ -38,7 +38,7 @@
                             @error('body')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
-                            <p class="mt-1 text-sm text-gray-500">You can use HTML formatting and placeholders like: {{name}}, {{email}}, {{phone}}</p>
+                            <p class="mt-1 text-sm text-gray-500">You can use HTML formatting and placeholders like: @{{name}}, @{{email}}, @{{phone}}</p>
                         </div>
 
                         <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
