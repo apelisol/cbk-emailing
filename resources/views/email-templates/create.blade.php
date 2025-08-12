@@ -46,9 +46,9 @@
                                 <div class="ml-3">
                                     <p class="text-sm text-blue-700">
                                         <strong>Available Placeholders:</strong><br>
-                                        • <code>{{name}}</code> - Client's name<br>
-                                        • <code>{{email}}</code> - Client's email<br>
-                                        • <code>{{phone}}</code> - Client's phone number
+                                        • <code>@{{name}}</code> - Client's name<br>
+                                        • <code>@{{email}}</code> - Client's email<br>
+                                        • <code>@{{phone}}</code> - Client's phone number
                                     </p>
                                 </div>
                             </div>
