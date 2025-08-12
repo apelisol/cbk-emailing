@@ -306,12 +306,14 @@
                 currentPlaceholders = placeholders || [];
                 
                 if (placeholders && placeholders.length > 0) {
-                    const variablesHtml = placeholders.map(placeholder => 
-                        `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-2 mb-2 cursor-pointer hover:bg-blue-200" 
-                              onclick="insertAtCaret('templateContent', '{{${placeholder}}}')">
-                            @{{${placeholder}}}
-                        </span>`
-                    ).join('');
+                    const variablesHtml = placeholders.map(placeholder => {
+                        const placeholderValue = `{{${placeholder}}}`;
+                        return `
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-2 mb-2 cursor-pointer hover:bg-blue-200" 
+                                  onclick="insertAtCaret('templateContent', '${placeholderValue}')">
+                                @{{${placeholder}}}
+                            </span>`;
+                    }).join('');
                     
                     availableVariablesEl.innerHTML = `
                         <span class="text-xs font-medium text-gray-500">Click to insert:</span>
